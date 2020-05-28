@@ -1,5 +1,12 @@
 <template>
-    <div class="login_container">
+    <el-container class="login_container">
+      <el-header>
+        <div>
+          <img src="../assets/shop.png">
+          <span>Maimaimai!</span>
+        </div>
+      </el-header>
+      <el-main>
         <div class="login_box">
             <!-- 头像区域 -->
             <h3 class="box_title">用户登录</h3>
@@ -19,7 +26,8 @@
                 </el-form-item>
             </el-form>
         </div>
-    </div>
+      </el-main>
+    </el-container>
 </template>
 
 <script>
@@ -61,6 +69,27 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.el-header{
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 700;
+  color: #FF6473;
+  > div{
+    display: flex;
+    align-items: center;
+    span{
+      margin-left: 5px;
+    }
+    img{
+      width: 40px;
+      margin-left: 50px;
+    }
+  }
+}
+
 .login_container{
     height: 100%;
     background-color: #f4abb6;
