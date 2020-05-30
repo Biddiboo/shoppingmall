@@ -58,5 +58,6 @@ Vue.use(Tree)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(Cascader)
+
 Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$message = Message

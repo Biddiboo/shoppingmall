@@ -21,9 +21,9 @@
                     <el-tag v-else-if="scope.row.cat_level === 1" type="success">二级</el-tag>
                     <el-tag v-else-if="scope.row.cat_level === 2" type="warning">三级</el-tag>
                 </template>
-                <template slot="opt">
-                    <el-button type="primary" icon="el-icon-edit" size="mini">编辑</el-button>
-                    <el-button type="danger" icon="el-icon-delete" size="mini">删除</el-button>
+                <template slot="opt" slot-scope="scope">
+                    <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditDialog(scope.row.cat_id)">编辑</el-button>
+                    <el-button type="danger" icon="el-icon-delete" size="mini" @click="removeUserById(scope.row.cat_id)">删除</el-button>
                 </template>
             </tree-table>
         </el-card>
@@ -54,6 +54,21 @@
             layout="total, sizes, prev, pager, next, jumper"
             :total="total">
         </el-pagination>
+        <!-- 编辑窗口 -->
+        <el-dialog
+        title="修改用户"
+        :visible.sync="editDialogVisible"
+        width="50%" @close="editDialogClosed">
+            <el-form :model="editForm" :rules="editFormRules" ref="editFormRef" label-width="70px">
+                <el-form-item label="分类名称">
+                    <el-input v-model="editForm.cat_name"></el-input>
+                </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="editDialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="editUserInfo">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 <script>
@@ -101,7 +116,15 @@ export default {
         children: 'children',
         expandTrigger: 'hover'
       },
-      selectedKeys: []
+      selectedKeys: [],
+      // 编辑用户数据
+      editDialogVisible: false,
+      editForm: {},
+      editFormRules: {
+        cat_name: [{
+          required: true, message: '请输入分类名称', trigger: 'blur'
+        }]
+      }
     }
   },
   created () {
@@ -162,12 +185,59 @@ export default {
       this.addCateForm.cat_pid = 0
       this.addCateForm.cat_level = 0
       this.selectedKeys = []
+    },
+    // 编辑分类信息
+    async showEditDialog (id) {
+      const { data: res } = await this.$http.get('categories/' + id)
+      if (res.meta.status !== 200) {
+        return this.$message.error('查询分类信息失败！')
+      }
+      this.editForm = res.data
+      this.editDialogVisible = true
+    },
+    editDialogClosed () {
+      this.$refs.editFormRef.resetFields()
+    },
+    editUserInfo () {
+      this.$refs.editFormRef.validate(async valid => {
+        if (!valid) return
+        const { data: res } = await this.$http.put('categories/' + this.editForm.cat_id, {
+          cat_name: this.editForm.cat_name
+        })
+        if (res.meta.status !== 200) {
+          return this.$message.error('编辑分类信息失败！')
+        }
+        this.editDialogVisible = false
+        this.getCateList()
+        this.$message.success('编辑分类信息成功')
+      })
+    },
+    // 删除分类
+    async removeUserById (id) {
+      const confirmResult = await this.$confirm(
+        '此操作将永久删除该用户，是否继续',
+        '提示',
+        {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }
+      ).catch(err => err)
+      if (confirmResult !== 'confirm') {
+        return this.$message.info('已取消删除！')
+      }
+      const { data: res } = await this.$http.delete('categories/' + id)
+      if (res.meta.status !== 200) {
+        return this.$message.error('删除分类失败！')
+      }
+      this.getCateList()
+      this.$message.success('删除分类成功')
     }
   }
 }
 </script>
 <style lang="less" scoped>
-.el-button{
+.el-row{
   margin-bottom: 15px;
 }
 
