@@ -8,7 +8,7 @@
         <el-card>
           <el-row>
             <el-col>
-              <el-button type="primary" @click="addDialogVisible=true">添加角色</el-button>
+              <el-button type="danger" @click="addDialogVisible=true">添加角色</el-button>
             </el-col>
           </el-row>
             <el-table :data="roleList" border stripe>
@@ -50,12 +50,12 @@
         <el-dialog
         title="添加用户"
         :visible.sync="addDialogVisible"
-        width="60%" @close="addDialogClosed">
+        width="40%" @close="addDialogClosed">
         <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="70px">
-          <el-form-item label="角色名" prop="roleName">
+          <el-form-item label="角色名称" prop="roleName" label-width="100px">
             <el-input v-model="addForm.roleName"></el-input>
           </el-form-item>
-          <el-form-item label="角色描述" prop="roleDesc">
+          <el-form-item label="角色描述" prop="roleDesc" label-width="100px">
             <el-input v-model="addForm.roleDesc"></el-input>
           </el-form-item>
         </el-form>
@@ -68,12 +68,12 @@
         <el-dialog
         title="修改用户"
         :visible.sync="editDialogVisible"
-        width="50%" @close="editDialogClosed">
+        width="40%" @close="editDialogClosed">
           <el-form :model="editForm" :rules="editFormRules" ref="editFormRef" label-width="70px">
-            <el-form-item label="角色名称" prop="roleName">
+            <el-form-item label="角色名称" prop="roleName" label-width="100px">
               <el-input v-model="editForm.roleName"></el-input>
             </el-form-item>
-            <el-form-item label="角色描述" prop="roleDesc">
+            <el-form-item label="角色描述" prop="roleDesc" label-width="100px">
               <el-input v-model="editForm.roleDesc"></el-input>
             </el-form-item>
           </el-form>

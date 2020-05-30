@@ -13,7 +13,7 @@
                     </el-input>
                 </el-col>
                 <el-col :span="4">
-                    <el-button type="primary" @click="addDialogVisible=true">添加用户</el-button>
+                    <el-button type="danger" @click="addDialogVisible=true">添加用户</el-button>
                 </el-col>
             </el-row>
             <el-table :data="userlist" border stripe>

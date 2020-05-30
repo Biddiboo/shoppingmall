@@ -8,7 +8,7 @@
         <el-card class="box-card">
             <el-row>
                 <el-col>
-                    <el-button type="primary" @click="showAddCateDialog">添加分类</el-button>
+                    <el-button @click="showAddCateDialog" type="danger">添加分类</el-button>
                 </el-col>
             </el-row>
             <tree-table :data="catelist" :columns="columns" :selection-type="false" :expand-type="false" show-index index-text="" border :show-row-hover="false">
