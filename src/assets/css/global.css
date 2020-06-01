@@ -24,3 +24,20 @@ body,
 .el-cascader-panel{
     max-height: 250px;
 }
+
+.el-steps__title{
+    font-size: 13px;
+}
+
+.el-steps{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.el-cascader{
+    margin-left: 15px;
+}
+
+.ql-editor{
+    min-height: 300px;
+}

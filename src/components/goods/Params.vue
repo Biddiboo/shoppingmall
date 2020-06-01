@@ -306,9 +306,6 @@ export default {
 .cat_opt{
   margin-bottom: 15px;
 }
-.el-cascader{
-  margin-left: 15px;
-}
 .el-tag{
   margin: 5px;
 }

@@ -7,7 +7,7 @@
         </el-breadcrumb>
         <el-card class="box-card">
             <el-row :gutter="20">
-                <el-col :span="10">
+                <el-col :span="6">
                     <el-input placeholder="请输入内容" v-model="queryInfo.query" class="input-with-select">
                         <el-button slot="append" icon="el-icon-search" @click="getUserList"></el-button>
                     </el-input>
@@ -247,7 +247,6 @@ export default {
     editUserInfo () {
       this.$refs.editFormRef.validate(async valid => {
         if (!valid) return
-        console.log(this.editForm.id)
         const { data: res } = await this.$http.put('users/' + this.editForm.id, {
           email: this.editForm.email,
           mobile: this.editForm.mobile
