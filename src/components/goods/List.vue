@@ -115,6 +115,7 @@ export default {
   },
   methods: {
     async getGoodsList () {
+      console.log(this.queryInfo)
       const { data: res } = await this.$http.get('goods', { params: this.queryInfo })
       this.goodslist = res.data.goods
       this.total = res.data.total
