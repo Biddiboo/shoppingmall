@@ -8,9 +8,9 @@
     <el-card class="box-card">
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-input placeholder="请输入内容" :v-model="queryInfo.query" class="input-with-select" clearable @clear="getOrderList">
-            <el-button slot="append" icon="el-icon-search" @click="getOrderList"></el-button>
-          </el-input>
+            <el-input placeholder="请输入内容" v-model="queryInfo.query" class="input-with-select">
+                <el-button slot="append" icon="el-icon-search" @click="getOrderList"></el-button>
+            </el-input>
         </el-col>
       </el-row>
       <el-table :data="orderlist" border stripe>
